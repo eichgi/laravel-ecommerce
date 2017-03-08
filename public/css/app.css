@@ -1,0 +1,85 @@
+/*// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);*/
+/*// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";*/
+.navbar {
+  margin-bottom: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.top-space {
+  margin-top: 1em;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-transform {
+  text-transform: none;
+}
+
+.large-padding {
+  padding: 10px 15px;
+}
+
+.big-padding {
+  padding: 30px;
+}
+
+.blue-grey {
+  background-color: #37474f;
+}
+
+.white-text {
+  color: white;
+}
+
+.red-text {
+  color: #c83232;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.table {
+  background: #FFF;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.white {
+  background: white;
+}
+
+.floating {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 100;
+}
+
+.product {
+  width: 600px;
+  max-width: 100%;
+  padding: 1em;
+  position: relative;
+}
+
+.product h1 {
+  padding-bottom: 10px;
+  border-bottom: solid 1px;
+}
+
+.product .actions {
+  right: 1em;
+  top: 10px;
+}
+
+/*# sourceMappingURL=app.css.map */
