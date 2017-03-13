@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 class OrdersController extends Controller
 {
     /**
+     * OrdersController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -15,8 +24,9 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::latest()->get();
-
-        return view('orders.index', ['orders' => $orders]);
+        $totalMonth = Order::totalMonth();
+        $totalMonthCount = Order::totalMonthCount();
+        return view('orders.index', compact(['orders', 'totalMonth', 'totalMonthCount']));
     }
 
     /**
@@ -28,6 +38,10 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+        $field = $request->name;
+        $order->$field = $request->value;
+        $order->save();
+        return $order->$field;
     }
 }

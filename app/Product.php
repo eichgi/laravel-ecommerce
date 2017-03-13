@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+
+    public function scopeLatest($query)
+    {
+        return $query->orderBy('id', 'desc');
+    }
+
     public function paypalItem()
     {
         return \PaypalPayment::item()

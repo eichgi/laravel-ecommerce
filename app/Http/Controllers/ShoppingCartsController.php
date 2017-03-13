@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\PayPal;
 use App\ShoppingCart;
 use Illuminate\Http\Request;
 
 class ShoppingCartsController extends Controller
 {
-    public function index()
+
+    public function __construct()
     {
-        $shopping_cart_id = \Session::get('shopping_cart_id');
+        $this->middleware('shoppingcart');
+    }
 
-        $shopping_cart = ShoppingCart::findOrCreateBySessionID($shopping_cart_id);
+    public function index(Request $request)
+    {
+        //$order = Order::all()->last();
+        //$order->sendMail();
+        //$order->sendUpdateMail();
 
-        $paypal = new PayPal($shopping_cart);
+        $shopping_cart = $request->shopping_cart;
 
-        $payment = $paypal->generate();
 
-        return redirect($payment->getApprovalLink());
+        $products = $shopping_cart->products()->get();
+
+        $total = $shopping_cart->total();
+
+        return view('shopping_carts.index', ['products' => $products, 'total' => $total]);
     }
 
     public function show($id)
@@ -26,5 +36,16 @@ class ShoppingCartsController extends Controller
         $shopping_cart = ShoppingCart::where('customid', $id)->first();
         $order = $shopping_cart->order();
         return view('shopping_carts.completed', ['shopping_cart' => $shopping_cart, 'order' => $order]);
+    }
+
+    public function checkout(Request $request)
+    {
+        $shopping_cart = $request->shopping_cart;
+
+        $paypal = new PayPal($shopping_cart);
+
+        $payment = $paypal->generate();
+
+        return redirect($payment->getApprovalLink());
     }
 }

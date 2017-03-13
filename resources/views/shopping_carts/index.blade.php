@@ -26,5 +26,8 @@
             </tr>
             </tbody>
         </table>
+        <div class="text-right">
+            @include('shopping_carts.form')
+        </div>
     </div>
 @endsection

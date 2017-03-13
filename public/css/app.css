@@ -2,6 +2,19 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);*/
 /*// Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";*/
+.circle-shopping-cart {
+  background-color: #232980;
+  border-radius: 1em 1em;
+}
+
+.products-container .product {
+  margin-top: 1em;
+}
+
+.product-avatar {
+  max-width: 100%;
+}
+
 .navbar {
   margin-bottom: 0px;
 }
@@ -80,6 +93,46 @@
 .product .actions {
   right: 1em;
   top: 10px;
+}
+
+.sale-data {
+  padding: 1em;
+  text-align: center;
+  border-right: solid 1px #222;
+}
+
+.sale-data span {
+  display: block;
+  font-size: 2.2em;
+  color: #3f51b5;
+}
+
+.creado {
+  background-color: #d4e157;
+}
+
+.highlight {
+  -webkit-animation: highlight 1.5s;
+  animation: highlight 1.5s;
+}
+
+@-webkit-keyframes highlight {
+  50% {
+    background-color: #ffff00;
+    color: black;
+  }
+  100% {
+    background-color: inherit;
+  }
+}
+
+@keyframes highlight {
+  50% {
+    background-color: #ffff00;
+  }
+  100% {
+    background-color: inherit;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */

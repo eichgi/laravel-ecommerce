@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Mail\OrderCreated;
+use App\Mail\OrderUpdated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -18,6 +21,23 @@ class Order extends Model
         'total',
         'guide_number'
     ];
+
+    public function sendMail()
+    {
+        //$mailer = new OrderCreated($this);
+
+        Mail::to('apocalo_90@hotmail.com')->send(new OrderCreated($this));
+    }
+
+    public function sendUpdateMail()
+    {
+        Mail::to('apocalo_90@hotmail.com')->send(new OrderUpdated($this));
+    }
+
+    public function shoppingCartID()
+    {
+        return $this->shopping_cart->customid;
+    }
 
     public function scopeLatest($query)
     {
@@ -39,7 +59,24 @@ class Order extends Model
         return "$this->line1 $this->line2";
     }
 
-    public static function createFromPayPalResponse($response, $shopping_cart)
+    public function shopping_cart()
+    {
+        return $this->belongsTo('App\ShoppingCart');
+    }
+
+    public static function totalMonth()
+    {
+        return Order::monthly()->sum('total') / 100;
+    }
+
+    public static function totalMonthCount()
+    {
+
+        return Order::monthly()->count();
+    }
+
+    public
+    static function createFromPayPalResponse($response, $shopping_cart)
     {
         $payer = $response->payer;
         $orderData = (array)$payer->payer_info->shipping_address;
